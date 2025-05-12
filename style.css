@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(198, 192, 182);
+}
+
+.game-card {
+    height: 100vh;
+}
+
+.form-group {
+    margin-inline: auto;
+    padding: 5px;
+    width: auto;
+}
+
+.card-header {
+background-color:rgb(96, 70, 38);
+color: blanchedalmond;
+}
+
+.card-body {
+    background-color:rgb(198, 132, 88);
+}
