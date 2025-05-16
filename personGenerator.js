@@ -29,7 +29,7 @@ const personGenerator = {
             "id_3": "Иван",
             "id_4": "Артем",
             "id_5": "Дмитрий",
-            "id_6": "Никита",
+            "id_6": "Роман",
             "id_7": "Михаил",
             "id_8": "Даниил",
             "id_9": "Егор",
@@ -50,6 +50,38 @@ const personGenerator = {
             "id_8": "Юлия",
             "id_9": "Полина",
             "id_10": "Ксения"
+        }
+    }`,
+
+    professionFemaleJson: `{
+        "count": 10,
+        "list": {     
+            "id_1": "Переводчик",
+            "id_2": "Дизайнер",
+            "id_3": "Педагог",
+            "id_4": "Врач",
+            "id_5": "Стилист",
+            "id_6": "Косметолог",
+            "id_7": "Няня",
+            "id_8": "Менеджер",
+            "id_9": "Кондитер",
+            "id_10": "Швея"
+        }
+    }`,
+
+    professionMaleJson: `{
+        "count": 10,
+        "list": {     
+            "id_1": "Военный",
+            "id_2": "Сантехник",
+            "id_3": "Пожарный",
+            "id_4": "Арматурщик",
+            "id_5": "Грузчик",
+            "id_6": "Слесарь",
+            "id_7": "Электрик",
+            "id_8": "Шахтер",
+            "id_9": "Летчик",
+            "id_10": "Сварщик"
         }
     }`,
 
@@ -86,10 +118,37 @@ const personGenerator = {
         }  
     },
 
+    randomPatronymic: function() { 
+        patronymic = this.randomValue(this.firstNameMaleJson);
+        if (this.person.gender == 'Мужчина') {
+            if (patronymic.includes('й')) {
+                patronymic = patronymic.replace("й", "евич");
+            } else
+                patronymic = patronymic + "ович";
+        } else
+ 
+        if (this.person.gender == 'Женщина') {
+            if (patronymic.includes('й')) {
+                patronymic = patronymic.replace("й", "евна");
+            } else
+                patronymic = patronymic + "овна"; 
+        }
+        return patronymic;
+    },
+
     randomBirthYear: function() { 
             year = this.randomIntNumber(2010, 1950);
             birthYear = year + " года рождения"; 
             return birthYear;
+    },
+
+    randomProfession: function() {
+        if (this.person.gender == 'Женщина') {
+          return this.randomValue(this.professionFemaleJson);
+        }
+        else {
+          return this.randomValue(this.professionMaleJson);
+        }  
     },
 
     getPerson: function () {
@@ -98,6 +157,8 @@ const personGenerator = {
         this.person.firstName = this.randomFirstName();
         this.person.surnameJson = this.randomSurName();
         this.person.birthYear = this.randomBirthYear();
+        this.person.patronymic = this.randomPatronymic();
+        this.person.profession = this.randomProfession();
         return this.person;
     }
 };
